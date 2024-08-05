@@ -3,10 +3,10 @@ from django.contrib.auth.models import User
 
 class Book(models.Model):
     title = models.CharField(max_length=255, null=True)
-    author = models.CharField(max_length=255)
-    description = models.TextField()
-    cover_image = models.URLField()
-    rating = models.DecimalField(max_digits=3, decimal_places=2, null=True)
+    author = models.CharField(max_length=255, null=True)
+    description = models.TextField(null=True)
+    cover_image = models.URLField(null=True)
+    rating = models.CharField(max_length=100, null=True, blank=True)
     genre = models.CharField(max_length=100, null=True)
     published_date = models.CharField(max_length=100, null=True)
 

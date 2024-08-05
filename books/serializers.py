@@ -5,6 +5,9 @@ class BookSerializer(serializers.ModelSerializer):
     class Meta:
         model = Book
         fields = '__all__'
+        extra_kwargs = {
+            'rating': {'required': False},  # Allow rating to be optional
+        }
 
 class RecommendationSerializer(serializers.ModelSerializer):
     class Meta:
