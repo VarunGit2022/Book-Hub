@@ -122,9 +122,6 @@ def book_list_create_view(request):
         'comment_reply_dict': comment_reply_dict,
     })
 
-
-
-
 @login_required
 def recommendation_list_create_view(request):
     # Get filter and sort criteria from request

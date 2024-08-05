@@ -1,5 +1,4 @@
 {% load static %}
-{% csrf_token %}
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -100,26 +99,25 @@
                 let bookList = document.getElementById('book-list');
                 bookList.innerHTML = '';
                 data.forEach(book => {
-                    let bookItem = `<div class="book-card row">
+                    let bookItem = `<div class="book-card row" id="book-${book.id}">
                         <div class="col-md-2">
                             <img src="${book.cover_image}" alt="${book.title} cover" class="img-fluid">
                         </div>
                         <div class="col-md-10">
                             <h2>${book.title}</h2>
                             <p><strong>Author:</strong> ${book.author}</p>
-                            <p id="description" class="description-summary">${book.description}</p>
-                            <button onclick="toggleDescription(${book.id})" class="btn btn-secondary">View Description</button>
+                            <p><strong>Description:</strong>${book.description}</p>
                             <p><strong>Rating:</strong> ${book.rating}</p>
                             <p><strong>Genre:</strong> ${book.genre}</p>
                             <p><strong>Published Date:</strong> ${book.published_date}</p>
-                            <button data-book='${JSON.stringify(book)}' onclick="saveBook(this)" class="button is-dark is-outlined is-fullwidth">Save this book</button>
+                            <button data-book='${JSON.stringify(book)}' onclick="saveBook(this)" class="btn btn-dark">Save this book</button>
                         </div>
                     </div>`;
                     bookList.innerHTML += bookItem;
                 });
             });
         }
-        
+
         function saveBook(button) {
             const book = JSON.parse(button.getAttribute('data-book')); // Parse the book data back into an object
             fetch('/api/save-book/', {
@@ -142,8 +140,7 @@
                 console.error('Error saving book:', error);
             });
         }
-        
-        
+
         // Helper function to get the CSRF token (if using Django)
         function getCookie(name) {
             let cookieValue = null;
@@ -158,18 +155,6 @@
                 }
             }
             return cookieValue;
-        }
-
-        function toggleDescription(id) {
-            const description = document.getElementById(`description`);
-            const button = description.nextElementSibling;
-            if (description.style.display === 'none') {
-                description.style.display = 'block';
-                button.textContent = 'Hide Description';
-            } else {
-                description.style.display = 'none';
-                button.textContent = 'View Description';
-            }
         }
     </script>
 
