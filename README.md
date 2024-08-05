@@ -55,7 +55,7 @@ Django Book Hub is a web application for managing books, recommendations, commen
     python manage.py runserver
     ```
 
-6. **Access the Application**: Open your web browser and navigate to [http://127.0.0.1:8000/](http://127.0.0.1:8000/) to see the application in action.
+6. **Access the Application**: Open your web browser and navigate to [http://127.0.0.1:8000/](http://127.0.0.1:8000/api/) to see the application in action.
 
 ## Configuration
 
