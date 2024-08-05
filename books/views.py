@@ -213,8 +213,9 @@ def save_book(request):
         if rating is None:
             rating = 0
 
+        # Check if the book already exists
         if not Book.objects.filter(title=title).exists():
-            print("True")
+            # Create a new book entry
             Book.objects.create(
                 title=title,
                 author=author,
@@ -224,8 +225,11 @@ def save_book(request):
                 genre=genre,
                 published_date=published_date,
             )
-            return redirect('book-list-create')
+            # Redirect to the book list page after saving the book
+            return JsonResponse({'success': True, 'redirect_url': 'book-list-create'})
         else:
+            # Return a message indicating that the book already exists
             return JsonResponse({"message": "Book already exists!"}, status=400)
 
+    # Handle invalid request methods
     return JsonResponse({"message": "Invalid request method."}, status=405)
